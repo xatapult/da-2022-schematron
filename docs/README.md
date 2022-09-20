@@ -70,7 +70,7 @@ I come from a technical IT background. Xatapult is deliberately looking for cont
 
 I do not just strive for the best solution from a business and technical perspective, but also for optimal understandability. Therefore, documentation is never an afterthought. I consider my ability to explain and clarify complex technical stuff, both live and in prose, as an important non-technical skill.
 
-In my (recent) past I have given several successful courses on topics such as XML, XSLT, XML&#160;Schema and XProc. Most of these courses I developed myself.
+In my (recent) past I have given several successful courses on topics such as XML, XSLT, XML&#160;Schema and XProc. Most of these courses I developed myself. On Declarative Amsterdam  2021 I did a [tutorial on XProc](https://da.xatapult.com/) (which is still available).
 
 I'm the author of three books:
 
