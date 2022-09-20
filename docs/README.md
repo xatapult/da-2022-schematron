@@ -75,7 +75,7 @@ In my (recent) past I have given several successful courses on topics such as XM
 I'm the author of three books:
 
 - [Schematron - A language for validating XML](https://xmlpress.net) was published in September 2022 by XML Press.
-- [XProc 3.0 Programmer Reference](https://xmlpress.net/publications/Schematron-3-0/) was published in 2020 by XML Press. I was a member of the XProc 3.0 editing committee.
+- [XProc 3.0 Programmer Reference](https://xmlpress.net/publications/xproc-3-0/) was published in 2020 by XML Press. I was a member of the XProc 3.0 editing committee.
 - Together with Adam Retter, I wrote 
 [a book about eXist-db](http://shop.oreilly.com/product/0636920026525.do), an XML database and processing engine. The book was published by O’Reilly in 2014.
 
