@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xcourse xmlns="http://www.xtpxlib.nl/ns/xcourse" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.xtpxlib.nl/ns/xcourse ../../../../xatapult/xtpxlib-xcourse/xsd/xcourse.xsd"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <!-- ================================================================== -->
+  <!--
+    XCourse source file for the Declarative Amsterdam 2022 tutorial  
+  -->
+  <!-- ================================================================== -->
+
+  <xcourse-settings>
+    <exercises-number-sequentially>false</exercises-number-sequentially>
+    <oxygen-project-filename>da-2022-schematron-exercises</oxygen-project-filename>
+  </xcourse-settings>
+
+  <title>Schematron Tutorial</title>
+  <subtitle>Declarative Amsterdam 2022</subtitle>
+  <author>Erik Siegel</author>
+  <organization>Xatapult</organization>
+  <!-- ======================================================================= -->
+  
+  <section >
+    <title>Introduction and instructions</title>
+    
+    <theory>
+      bla bla bla
+      
+      
+      
+    </theory>
+    
+  </section>
+  
+<!-- ======================================================================= -->
+  
+  <section>
+    <title>Pre-flight check</title>
+    <exercises>
+
+      <exercise id="ex01">
+        <title>Pre-flight check</title>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <instructions xml:space="preserve">
+          We're going to validate the input document @input-1@:
+          
+          [[[input-1]]]
+
+          The rule is that all codes must start with the value of `/*/@depcode`, `IMP`. The third and last article in the list 
+          breaks this rule. 
+
+          A Schematron schema for checking this is in @schema-1@:
+          
+          [[[schema-1]]]
+          
+          Please validate @input-1@ with @schema-1@ and check the validation message.
+        </instructions>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <input-document id="input-1">
+          <inventory-list depcode="IMP" xmlns="">
+            <article code="IMP0001">
+              <name>Bolts</name>
+              <description>Nuts to secure things with</description>
+            </article>
+            <article code="IMP0002">
+              <name>Nuts</name>
+              <description>Bolts to turn on the nuts</description>
+            </article>
+            <article code="EXP0234">
+              <name>Bananas</name>
+              <description>Delicious ripe bananas</description>
+            </article>
+          </inventory-list>
+        </input-document>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <input-document id="schema-1" name="inventory-schema" extension="xsd">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt3">
+            <pattern>
+              <rule context="article">
+                <assert test="starts-with(@code, /inventory-list/@depcode)">The article code must start with the right prefix</assert>
+              </rule>
+            </pattern>
+          </schema>
+        </input-document>
+       
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <oxygen-scenarios>
+          <validate type="schematron" source-idref="input-1" schema-idref="schema-1"/>
+        </oxygen-scenarios>
+
+      </exercise>
+
+      <!-- ======================================================================= -->
+
+    </exercises>
+
+  </section>
+
+</xcourse>
