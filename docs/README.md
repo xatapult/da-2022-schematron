@@ -1,6 +1,6 @@
 # Schematron Tutorial - Declarative Amsterdam 2022
 
-Schematron is a validation language that goes beyond the capabilities of DTD, W3C Schema and RelaxNG. Using XPath expressions, it can validate almost anything in an XML document. 
+Schematron is an XML based validation language that goes beyond the capabilities of DTD, W3C Schema and RelaxNG. Using XPath expressions, it can validate almost anything in an XML document. It's main use case is in enforcing business rules for XML documents.
 
 [Declarative Amsterdam 2022](https://declarative.amsterdam/) (November 7 and 8, Amsterdam) will kick off with a day of tutorials and workshops. One of these will be an introduction to Schematron.
 
@@ -19,13 +19,15 @@ The [da-2022-schematron GitHub repository](https://github.com/xatapult/da-2022-s
 
 ## <a name="tutorial-info"></a>About the tutorial
 
-The Schematron tutorial will be a mix of theory, demos and practice. If time and technical hurdles allow, attendees can do (simple) exercises to get practice and a feel for the language. The annotated presentation will be available.
+The Schematron tutorial will be a mix of theory, demos and practice. If time and technical hurdles allow, attendees can do (simple) exercises to get practice and a feel for the language. The annotated presentation is available.
 
 ### <a name="tutorial-preparations"></a>**IMPORTANT:** Preparations for the tutorial
 
 If you would like to follow along and do some of the exercises yourself during the tutorial, you need a working Schematron processor present and working:
 
-- TBD 
+- Absolutely the easiest way to follow along is by using the [oXygen XML Editor](https://www.oxygenxml.com/). This is not a free product but you can obtain a trial license. This tutorial contains an oXygen project that makes doing the exercises very easy.
+- When you don't want to use oXygen you can use the [SchXslt Schematron processor command line interface](https://github.com/schxslt/schxslt/tree/master/cli). If you want to do this you're on your own, I have very little experience installing and using it.
+- And using any other Schematron processor is of course also fine. 
 
 
 ## <a name="about"></a>About Schematron
@@ -48,7 +50,9 @@ the public implementations support XSLT only.
 
 ### <a name="more-info"></a>Where to find more information?
 
-- TBD
+- I wrote a book about Schematron: [Schematron - A language for validating XML](https://xmlpress.net), XML Press, 2022. It explains the language in full.
+- [The Schematron website](https://schematron.com/) is maintained by the original designer of the language, Rick Jelliffe.
+- [Awesome Schematron](https://github.com/Schematron/awesome-schematron) is a curated list of awesome Schematron tools and applications. It contains links to (all versions of) the specification, interesting articles, and more.
 
 ### <a name="history"></a>A little history
 
@@ -70,10 +74,10 @@ In my (recent) past I have given several successful courses on topics such as XM
 
 I'm the author of three books:
 
+- [Schematron - A language for validating XML](https://xmlpress.net) was published in September 2022 by XML Press.
+- [XProc 3.0 Programmer Reference](https://xmlpress.net/publications/Schematron-3-0/) was published in 2020 by XML Press. I was a member of the XProc 3.0 editing committee.
 - Together with Adam Retter, I wrote 
 [a book about eXist-db](http://shop.oreilly.com/product/0636920026525.do), an XML database and processing engine. The book was published by O’Reilly in 2014.
-- [XProc 3.0 Programmer Reference](https://xmlpress.net/publications/Schematron-3-0/) was published in 2020 by XML Press. I was a member of the XProc 3.0 editing committee.
-- [Schematron - A language for validating XML](https://xmlpress.net) was published in September 2022 by XML Press.
 
-More details about me on my [LinkedIn profile](https://www.linkedin.com/in/esiegel/).
+More details about me on my [LinkedIn profile](https://www.linkedin.com/in/esiegel/). You can reach me at [erik@xatapult.nl](mailto:erik@xatapult.nl).
 
