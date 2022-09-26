@@ -26,7 +26,12 @@ The Schematron tutorial will be a mix of theory, demos and practice. If time and
 If you would like to follow along and do some of the exercises yourself during the tutorial, you need a working Schematron processor present and working:
 
 - Absolutely the easiest way to follow along is by using the [oXygen XML Editor](https://www.oxygenxml.com/). This is not a free product but you can obtain a trial license. This tutorial contains an oXygen project that makes doing the exercises very easy.
-- When you don't want to use oXygen you can use the [SchXslt Schematron processor command line interface](https://github.com/schxslt/schxslt/tree/master/cli). If you want to do this you're on your own, I have very little experience installing and using it.
+- When you don't want to use oXygen you can use the [SchXslt Schematron processor command line interface](https://github.com/schxslt/schxslt/tree/master/cli). To do this:
+  - Have Java installed (not sure which versions work)
+  - Go to the GitHub page of SchXslt: [https://github.com/schxslt/schxslt](https://github.com/schxslt/schxslt) 
+  - Go to the latest release page (releases are in the right hand column)
+  - Download `schxslt-cli.jar`
+  - Run `java -jar schxslt-cli.jar` for information on the command line options 
 - And using any other Schematron processor is of course also fine. 
 
 
@@ -50,7 +55,7 @@ the public implementations support XSLT only.
 
 ### <a name="more-info"></a>Where to find more information?
 
-- I wrote a book about Schematron: [Schematron - A language for validating XML](https://xmlpress.net), XML Press, 2022. It explains the language in full.
+- I wrote a book about Schematron: [Schematron - A language for validating XML](https://xmlpress.net/publications/schematron/), XML Press, 2022. It explains the language in full.
 - [The Schematron website](https://schematron.com/) is maintained by the original designer of the language, Rick Jelliffe.
 - [Awesome Schematron](https://github.com/Schematron/awesome-schematron) is a curated list of awesome Schematron tools and applications. It contains links to (all versions of) the specification, interesting articles, and more.
 
@@ -74,7 +79,7 @@ In my (recent) past I have given several successful courses on topics such as XM
 
 I'm the author of three books:
 
-- [Schematron - A language for validating XML](https://xmlpress.net) was published in September 2022 by XML Press.
+- [Schematron - A language for validating XML](https://xmlpress.net/publications/schematron/) was published in September 2022 by XML Press.
 - [XProc 3.0 Programmer Reference](https://xmlpress.net/publications/xproc-3-0/) was published in 2020 by XML Press. I was a member of the XProc 3.0 editing committee.
 - Together with Adam Retter, I wrote 
 [a book about eXist-db](http://shop.oreilly.com/product/0636920026525.do), an XML database and processing engine. The book was published by O’Reilly in 2014.
