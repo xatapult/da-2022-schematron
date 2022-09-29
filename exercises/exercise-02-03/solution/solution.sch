@@ -10,7 +10,7 @@
   </pattern>
   <pattern>
     <rule context="/*/*">
-      <assert test="string-length(@code) eq 4">The code <value-of select="@code"/> is invalide, it must be 4 characters long</assert>
+      <assert test="string-length(@code) eq 4">The code <value-of select="@code"/> is invalid, it must be 4 characters long</assert>
     </rule>
   </pattern>
 </schema>

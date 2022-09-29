@@ -192,5 +192,6 @@
         <folder path="../../../schematron-book/"/>
         <folder path="../../../../xatapult/xtpxlib-xcourse/"/>
         <folder path="../../../../xproc-3/presentations/declarative-amsterdam-2021/da-2021-xproc/"/>
+        <file name="../../../schematron-book/build/schematron-book-full.pdf"/>
     </projectTree>
 </project>

@@ -126,7 +126,9 @@
     <title>Schematron fundamentals</title>
 
     <exercises>
+
       <exercise>
+        <title>Using patterns, rules, asserts and reports</title>
 
         <instructions xml:space="preserve">
           We're going to validate the input document @input-1@:
@@ -134,7 +136,7 @@
           [[[input-1]]]
           
           Rules are:
-          - Please *assert* that every identifier (in `&lt;ID>` elements) is exctaly 9 characters long
+          - Please *assert* that every identifier (in `&lt;ID>` elements) is exactly 9 characters long
           - Please *report* identifiers (in `&lt;ID>` elements) that start with the character `X` as being special
           
           Use the template document @template-1@ as a starting point. In oXygen, the input document @input-1@ automatically 
@@ -194,7 +196,8 @@
 
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-      <exercise>
+      <exercise id="ex02">
+        <title>Rules processing</title>
 
         <instructions xml:space="preserve">
           We're going to validate the input document @input-1@:
@@ -284,9 +287,10 @@
       <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
       <exercise>
+        <title>Enhancing messages</title>
 
         <instructions xml:space="preserve">
-          This exercise builds on the previous one. We're going to validate the input document @input-1@ again:
+          This exercise builds on the previous exercise @ex02@. We're going to validate the input document @input-1@ again:
           
           [[[input-1]]]
           
@@ -418,9 +422,280 @@
 
       </exercise>
 
+      <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+      <exercise>
+        <title>Using variables</title>
+
+        <instructions xml:space="preserve">
+          This exercise builds on the pre-flight check exercise @ex01@. We're validating the input document @input-1@:
+          
+          [[[input-1]]]
+          
+          The rule for this document is that all codes must start with the department code, which is in the `depcode` attribute on the root element.
+                    
+          The basic Schematron schema for this is in @template-1@:
+          
+          [[[template-1]]]
+          
+          Enhance this schema so that:
+          - The department code is stored in a global variable and used in the assert's expression and message
+          - Add a variable to the rule that stores the value of the article's `code` attribute and use this in the assert's expression and message 
+          - Also add the name of the article (in the `&lt;name>` element) to the message
+        </instructions>
+
+
+        <template-document id="template-1" extension="sch" name="template">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt3">
+            <pattern>
+              <rule context="article">
+                <assert test="starts-with(@code, /inventory-list/@depcode)">The article code must start with the right prefix</assert>
+              </rule>
+            </pattern>
+          </schema>
+        </template-document>
+
+
+        <input-document id="input-1" name="input">
+          <inventory-list depcode="IMP">
+            <article code="IMP0001">
+              <name>Bolts</name>
+              <description>Nuts to secure things with</description>
+            </article>
+            <article code="IMP0002">
+              <name>Nuts</name>
+              <description>Bolts to turn on the nuts</description>
+            </article>
+            <article code="EXP0234">
+              <name>Bananas</name>
+              <description>Delicious ripe bananas</description>
+            </article>
+          </inventory-list>
+        </input-document>
+
+
+        <solution-document id="solution-1" extension="sch" name="solution">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt3">
+            <let name="department-code" value="/inventory-list/@depcode"/>
+            <pattern>
+              <rule context="article">
+                <let name="article-code" value="@code"/>
+                <assert test="starts-with($article-code, $department-code)"> The article code (<value-of select="$article-code"/>) must start with the
+                  right prefix (<value-of select="$department-code"/>) for <value-of select="name"/>
+                </assert>
+              </rule>
+            </pattern>
+          </schema>
+        </solution-document>
+
+
+        <explanation xml:space="preserve">
+          One of the possible solutions for this exercise is in @solution-1@:
+          
+          [[[solution-1]]]
+          
+          - The first variable,`department-code` stores the global value of the `depcode` attribute on the root element.
+          - The rule creates a variable `article-code` with the value of article's the `code` attribute.
+          - Both variables are used in both the assert's expression and resulting message.
+        </explanation>
+
+
+        <oxygen-scenarios>
+          <validate type="schematron" source-idref="input-1" schema-idref="template-1"/>
+        </oxygen-scenarios>
+
+      </exercise>
+
+      <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+      <exercise>
+        <title>Using namespaces</title>
+
+        <instructions xml:space="preserve">
+          In this exercise we're going to validate the DocBook input document @input-1@:
+          
+          [[[input-1]]]
+          
+          The rules for this document are:
+          - A section on the first level (`&lt;sect1> elements`) must have at least 3 paragraphs (`&lt;para> elements`)
+          - The title of any section must not be longer than 30 characters
+                    
+          A template Schematron schema for this is in @template-1@. Finish this schema so the rules above are validated.
+          
+          As an extra, please use variables for the magic values, 3 and 30, in the validation rules.
+        </instructions>
+
+
+        <template-document id="template-1" extension="sch" name="template" xml:space="preserve">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt3">
+            <pattern>
+              
+            </pattern>
+          </schema>
+        </template-document>
+
+
+        <input-document id="input-1" name="input">
+          <article xmlns="http://docbook.org/ns/docbook" version="5.0">
+            <title>An example document</title>
+            <sect1>
+              <title>The first section about the number 42 (which has a very, very, very long title indeed)</title>
+              <para>A paragraph of text.</para>
+              <para>A <emphasis>second</emphasis> paragraph of text!</para>
+            </sect1>
+          </article>
+        </input-document>
+
+
+        <solution-document id="solution-1" extension="sch" name="solution">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt3">
+            <ns prefix="db" uri="http://docbook.org/ns/docbook"/>
+            <let name="title-max-length" value="30"/>
+            <let name="sect1-min-para-count" value="3"/>
+            <pattern>
+              <rule context="db:sect1">
+                <assert test="count(db:para) ge $sect1-min-para-count">The section titled "<value-of select="db:title"/>" must contain at least
+                    <value-of select="$sect1-min-para-count"/> paragraphs of text</assert>
+              </rule>
+            </pattern>
+            <pattern>
+              <rule context="db:title">
+                <let name="title-length" value="string-length(.)"/>
+                <assert test="$title-length le $title-max-length">The title "<value-of select="."/>" is <value-of select="$title-length"/> characters
+                  long, which is longer than the maximum allowed <value-of select="$title-max-length"/> characters</assert>
+              </rule>
+            </pattern>
+          </schema>
+        </solution-document>
+
+
+        <explanation xml:space="preserve">
+          One of the possible solutions for this exercise is in @solution-1@:
+          
+          [[[solution-1]]]
+          
+          - The `&lt;ns>` element defines the DocBook namespace an assigns it the prefix `db`
+          - Both magic values, 3 and 30, are stored in variables
+          - The first pattern checks the paragraph count of DocBook `&lt;sect1>` elements
+          - The second pattern checks the length of any DocBook `&lt;title>` element
+          
+          Please notice that the input document uses a default namespace declaration (`xmlns="http://docbook.org/ns/docbook"`) and the Schematron 
+          schema a namespace prefix (`db`). As long as the namespace URI is the same in both cases (`http://docbook.org/ns/docbook`) this does not 
+          matter.  
+        </explanation>
+
+
+        <oxygen-scenarios>
+          <validate type="schematron" source-idref="input-1" schema-idref="template-1"/>
+        </oxygen-scenarios>
+
+      </exercise>
+
     </exercises>
+  </section>
+
+  <!-- ======================================================================= -->
+
+  <section>
+    <title>Abstract patterns</title>
+    
+  </section>
+
+  
+  <!-- ======================================================================= -->
+  
+  <section>
+    <title>Query Language Binding</title>
+
+    <exercises>
+
+      <exercise>
+        <title>Use an XSLT function</title>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <instructions xml:space="preserve">
+          This exercise builds upon the first exercise @ex01@. We're going to validate the input document @input-1@:
+          
+          [[[input-1]]]
+          
+          Please change the schema:
+          - The test for the `code` attribute (`starts-with(@code, /inventory-list/@depcode)`) must be moved to a separate (boolean) XSLT function.
+          - Use this function in the assert's test.
+          
+          Remark: to save you from having to type the XSLT namespace correctly, it is already declared on the template's root element.
+        </instructions>
 
 
+        <input-document id="input-1" name="input">
+          <inventory-list depcode="IMP" xmlns="">
+            <article code="IMP0001">
+              <name>Bolts</name>
+              <description>Nuts to secure things with</description>
+            </article>
+            <article code="IMP0002">
+              <name>Nuts</name>
+              <description>Bolts to turn on the nuts</description>
+            </article>
+            <article code="EXP0234">
+              <name>Bananas</name>
+              <description>Delicious ripe bananas</description>
+            </article>
+          </inventory-list>
+        </input-document>
+
+
+        <template-document id="template-1" name="schema" extension="sch">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt3">
+            <pattern>
+              <rule context="article">
+                <assert test="starts-with(@code, /inventory-list/@depcode)">The article code must start with the right prefix</assert>
+              </rule>
+            </pattern>
+          </schema>
+        </template-document>
+
+        <solution-document id="solution-1" name="solution" extension="sch">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" queryBinding="xslt3">
+
+            <ns prefix="f" uri="#functions"/>
+
+            <let name="department-code" value="/*/@depcode"/>
+
+            <xsl:function xmlns:xsl="http://www.w3.org/1999/XSL/Transform" name="f:check-code" as="xs:boolean">
+              <xsl:param name="code" as="xs:string"/>
+              <xsl:sequence select="starts-with($code, $department-code)"/>
+            </xsl:function>
+
+            <pattern>
+              <rule context="article">
+                <assert test="f:check-code(@code)">The article code must start with the right prefix</assert>
+              </rule>
+            </pattern>
+          </schema>
+        </solution-document>
+
+        <explanation>
+          One of the possible solutions for this exercise is in @solution-1@:
+          
+          [[[solution-1]]]
+          
+          - Since we're going to use XSLT elements in our Schematron schema, we have to define the XSLT namespace on the root element (and bind it here to the prefix `xsl`)
+          - Define some namespace for the function (`#functions`) and assign it a prefix (`f`). As long as its URI doesn't clash with any of the other namespaces in use here, it doesn't matter what it is
+          - We get the department ocde upfornt. This is necessary here because an XPath function has no context item and therefore has no access to the document being validated
+          - Define a very simple function (`f:check-code`) with one parameter
+          - And use this function in the assert's test expression
+          
+        </explanation>
+
+
+        <oxygen-scenarios>
+          <validate type="schematron" source-idref="input-1" schema-idref="template-1"/>
+        </oxygen-scenarios>
+
+      </exercise>
+
+    </exercises>
   </section>
 
 </xcourse>
