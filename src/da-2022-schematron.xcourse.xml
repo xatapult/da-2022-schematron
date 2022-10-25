@@ -598,12 +598,117 @@
 
   <section>
     <title>Abstract patterns</title>
-    
+
+    <exercises>
+
+      <exercise>
+        <title>Using an abstract pattern</title>
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <instructions xml:space="preserve">
+          We're going to validate the input document @input-1@:
+          
+          [[[input-1]]]
+          
+          Rules are:
+          - Wooden crates must weigh less than 30 kg
+          - Containers must weigh less than 2500 kg
+          
+          Implement this using an abstract pattern that checks the weigth of something againts a maximum weight. 
+          Instantiate this pattern twice, once for wooden crates and once for containers.
+          
+          Use the template document @template-1@ as a starting point. In oXygen, the input document @input-1@ automatically 
+          uses @template-1@ for validation.
+        </instructions>
+
+
+        <input-document id="input-1" name="input">
+          <manifest xmlns="">
+
+            <crate type="wood">
+              <weight-kg>25</weight-kg>
+              <contents>books</contents>
+            </crate>
+
+            <crate type="wood">
+              <weight-kg>58</weight-kg>
+              <contents>books</contents>
+            </crate>
+
+            <crate type="metal">
+              <weight-kg>890</weight-kg>
+              <contents>dogfood</contents>
+            </crate>
+
+            <gastank>
+              <weight-kg>34</weight-kg>
+              <contents>nitrogen</contents>
+            </gastank>
+
+            <container>
+              <weight-kg>2536</weight-kg>
+              <contents>computers</contents>
+            </container>
+
+          </manifest>
+        </input-document>
+
+
+        <template-document id="template-1" name="schema" extension="sch">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt3">
+
+          </schema>
+        </template-document>
+
+        <solution-document id="solution-1" name="solution" extension="sch">
+          <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt3">
+
+            <pattern abstract="true" id="check-weight">
+              <!-- Parameter: $type, $maxweight -->
+              <rule context="$type">
+                <assert test="xs:integer(weight-kg) le $maxweight">This weighs too much</assert>
+              </rule>
+            </pattern>
+
+            <pattern is-a="check-weight">
+              <param name="type" value="crate[@type eq 'wood']"/>
+              <param name="maxweight" value="30"/>
+            </pattern>
+
+            <pattern is-a="check-weight">
+              <param name="type" value="container"/>
+              <param name="maxweight" value="2500"/>
+            </pattern>
+
+          </schema>
+        </solution-document>
+
+        <explanation>
+          One of the possible solutions for this exercise is in @solution-1@:
+          
+          [[[solution-1]]]
+          
+          - The abstract pattern with identifier `check-weight` implements a weight check for some element (`$type`) against a maximum weight (`$maxweight`). 
+          - This pattern is instantiated twice: Once for wooden crates and once for containers.
+          
+        </explanation>
+
+
+        <oxygen-scenarios>
+          <validate type="schematron" source-idref="input-1" schema-idref="template-1"/>
+        </oxygen-scenarios>
+
+
+      </exercise>
+
+    </exercises>
+
   </section>
 
-  
+
   <!-- ======================================================================= -->
-  
+
   <section>
     <title>Query Language Binding</title>
 
@@ -619,11 +724,15 @@
           
           [[[input-1]]]
           
-          Please change the schema:
+          A simple Schematron schema for this is in @template-1@:
+          
+          [[[template-1]]]
+          
+          Please change this schema:
           - The test for the `code` attribute (`starts-with(@code, /inventory-list/@depcode)`) must be moved to a separate (boolean) XSLT function.
           - Use this function in the assert's test.
           
-          Remark: to save you from having to type the XSLT namespace correctly, it is already declared on the template's root element.
+          Remark: to add the XSLT namespace, add `xmlns:xsl="http://www.w3.org/1999/XSL/Transform"` to the root element.
         </instructions>
 
 
@@ -680,9 +789,9 @@
           
           [[[solution-1]]]
           
-          - Since we're going to use XSLT elements in our Schematron schema, we have to define the XSLT namespace on the root element (and bind it here to the prefix `xsl`)
+          - Since we're going to use XSLT elements in our Schematron schema, we have to define the XSLT namespace (and bind it here to the prefix `xsl`). For technical reasons it appear on the `&lt;xsl:function&gt;` element here, but in general it's better to add it to the root element.
           - Define some namespace for the function (`#functions`) and assign it a prefix (`f`). As long as its URI doesn't clash with any of the other namespaces in use here, it doesn't matter what it is
-          - We get the department ocde upfornt. This is necessary here because an XPath function has no context item and therefore has no access to the document being validated
+          - We get the department code upfornt. This is necessary here because an XPath function has no context item and therefore has no access to the document being validated
           - Define a very simple function (`f:check-code`) with one parameter
           - And use this function in the assert's test expression
           

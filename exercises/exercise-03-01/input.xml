@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <crate type="wood">
+    <weight-kg>25</weight-kg>
+    <contents>books</contents>
+  </crate>
+
+  <crate type="wood">
+    <weight-kg>58</weight-kg>
+    <contents>books</contents>
+  </crate>
+
+  <crate type="metal">
+    <weight-kg>890</weight-kg>
+    <contents>dogfood</contents>
+  </crate>
+
+  <gastank>
+    <weight-kg>34</weight-kg>
+    <contents>nitrogen</contents>
+  </gastank>
+
+  <container>
+    <weight-kg>2536</weight-kg>
+    <contents>computers</contents>
+  </container>
+
+</manifest>
