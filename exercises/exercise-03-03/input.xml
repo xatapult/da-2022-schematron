@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<things-and-artifacts>
+  <thing name="thing 1" type="normal"/>
+  <thing name="thing 2" type="special"/>
+  <thing name="thing 3" type="special"/>
+  <thing name="thing 4" type="vintage"/>
+  <artifact name="artifact 1" type="martian"/>
+  <artifact name="artifact 2" type="zorkian"/>
+  <artifact name="artifact 3" type="venusian"/>
+</things-and-artifacts>
