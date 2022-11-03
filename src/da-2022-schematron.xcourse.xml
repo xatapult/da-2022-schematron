@@ -820,7 +820,7 @@
           
           [[[template-1]]]
           
-          Please break out the reused message in a diagnostic.
+          Please put the reused message in a diagnostic.
           
           As an extra, add the following diagnostics:
           - For things: Things must be normal or special

@@ -16,7 +16,7 @@
   <diagnostics>
     <diagnostic id="message-1"> Invalid type on <value-of select="@name"/>: <value-of select="@type"/></diagnostic>
     <diagnostic id="things-message">Things must be normal or special</diagnostic>
-    <diagnostic id="artifacts-message">Things must be normal or special</diagnostic>
+    <diagnostic id="artifacts-message">Artifacts must be martian or zorkian</diagnostic>
   </diagnostics>
 
 </schema>
